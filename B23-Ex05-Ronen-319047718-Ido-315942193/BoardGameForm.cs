@@ -12,6 +12,5 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
             InitializeComponent(i_Settings);
 
         }
-
     }
 }

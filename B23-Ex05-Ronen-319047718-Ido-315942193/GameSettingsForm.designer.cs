@@ -107,16 +107,7 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
             this.m_LabelBoardSize.TabIndex = 6;
             this.m_LabelBoardSize.Text = "Board Size:";
             // 
-            // m_LabelRow
-            // 
-            this.m_LabelRows.AutoSize = true;
-            this.m_LabelRows.Location = new System.Drawing.Point(32, 194);
-            this.m_LabelRows.Name = "m_LabelRow";
-            this.m_LabelRows.Size = new System.Drawing.Size(46, 17);
-            this.m_LabelRows.TabIndex = 7;
-            this.m_LabelRows.Text = "Rows:";
-            // 
-            // m_numericUpDownRowsAmount
+            // m_NumericUpDownRowsAmount
             // 
             this.m_NumericUpDownRowsAmount.Location = new System.Drawing.Point(84, 192);
             this.m_NumericUpDownRowsAmount.Maximum = new decimal(new int[] {
@@ -129,7 +120,7 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
             0,
             0,
             0});
-            this.m_NumericUpDownRowsAmount.Name = "m_numericUpDownRowsAmount";
+            this.m_NumericUpDownRowsAmount.Name = "m_NumericUpDownRowsAmount";
             this.m_NumericUpDownRowsAmount.Size = new System.Drawing.Size(45, 22);
             this.m_NumericUpDownRowsAmount.TabIndex = 8;
             this.m_NumericUpDownRowsAmount.Value = new decimal(new int[] {
@@ -138,7 +129,7 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
             0,
             0});
             // 
-            // m_numericUpDownColsAmount
+            // m_NumericUpDownColsAmount
             // 
             this.m_NumericUpDownColsAmount.Location = new System.Drawing.Point(236, 192);
             this.m_NumericUpDownColsAmount.Maximum = new decimal(new int[] {
@@ -151,7 +142,7 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
             0,
             0,
             0});
-            this.m_NumericUpDownColsAmount.Name = "m_numericUpDownColsAmount";
+            this.m_NumericUpDownColsAmount.Name = "m_NumericUpDownColsAmount";
             this.m_NumericUpDownColsAmount.Size = new System.Drawing.Size(45, 22);
             this.m_NumericUpDownColsAmount.TabIndex = 10;
             this.m_NumericUpDownColsAmount.Value = new decimal(new int[] {
@@ -159,6 +150,15 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
             0,
             0,
             0});
+            // 
+            // m_LabelRows
+            // 
+            this.m_LabelRows.AutoSize = true;
+            this.m_LabelRows.Location = new System.Drawing.Point(32, 194);
+            this.m_LabelRows.Name = "m_LabelRows";
+            this.m_LabelRows.Size = new System.Drawing.Size(46, 17);
+            this.m_LabelRows.TabIndex = 7;
+            this.m_LabelRows.Text = "Rows:";
             // 
             // m_LabelCols
             // 

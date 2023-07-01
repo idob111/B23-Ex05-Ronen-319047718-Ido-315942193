@@ -10,33 +10,48 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
     {
         public static void Run()
         {
-            GameSettingForm gameSettingsForm = new GameSettingForm();
-            Application.Run(gameSettingsForm);
-            GameSettings settings = gameSettingsForm.Settings;
-            if (settings != null)
+            GameSettings settings;
+            do
             {
-                if (validateSettings(settings))
+                GameSettingForm gameSettingsForm = new GameSettingForm();
+                Application.Run(gameSettingsForm);
+                settings = gameSettingsForm.Settings;
+                try
                 {
-                    Application.Run(new BoardGameForm(settings));
+                    validateSettings(settings);
                 }
-                else 
+                catch (Exception e)
                 {
-                    throw new FormatException("Insert Invalid Parameter");
+                    MessageBox.Show(e.Message, "Input error", MessageBoxButtons.OK);
+                    settings = null;
                 }
-            }
+            } while (settings == null);
 
+            Application.Run(new BoardGameForm(settings));
         }
 
-        private static bool validateSettings(GameSettings i_Settings)
+        private static void validateSettings(GameSettings i_Settings)
         {
-            bool isValid = true;
-            if (i_Settings.PlayerOneName == "")
-                isValid = false;
-            if (!i_Settings.IsModeAgainstComputer && i_Settings.PlayerTwoName == "")
-                isValid = false;
-            if (i_Settings.NumberOfRows != i_Settings.NumberOfCols)
-                isValid = false;
-            return isValid;
+            string k_NoPlayerNameMsg = "Player name cannot be empty";
+            if(i_Settings.PlayerOneName == string.Empty)
+            {
+                throw new FormatException(k_NoPlayerNameMsg);
+            }
+
+            if (!playerTwoHasName(i_Settings))
+            {
+                throw new FormatException(k_NoPlayerNameMsg);
+            }
+
+            if(i_Settings.NumberOfRows != i_Settings.NumberOfCols)
+            {
+                throw new ArgumentException("Number of rows must match number of cols");
+            }
+        }
+
+        private static bool playerTwoHasName(GameSettings i_Settings)
+        {
+            return (i_Settings.IsModeAgainstPlayer && (i_Settings.PlayerTwoName != string.Empty));
         }
     }
 }
