@@ -49,7 +49,6 @@
     <Compile Include="IO.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PointIndex.cs" />
-    <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

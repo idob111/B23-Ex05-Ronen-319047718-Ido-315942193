@@ -81,7 +81,9 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
             Button clickedButton = (Button)sender;
             clickedButton.Enabled = false;
 
-            GameManager.playTurn();
+
+            // TODO: pass here the button index
+            GameManager.playHumanTurn();
         }
 
         #endregion
