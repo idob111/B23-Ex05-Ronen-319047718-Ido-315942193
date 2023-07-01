@@ -51,6 +51,7 @@
       <DependentUpon>BoardGameForm.cs</DependentUpon>
     </Compile>
     <Compile Include="FormsManager.cs" />
+    <Compile Include="GameManager.cs" />
     <Compile Include="GameSettings.cs" />
     <Compile Include="GameSettingsForm.cs">
       <SubType>Form</SubType>
@@ -84,6 +85,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CSharp Ex2\GameLogic.csproj">
+      <Project>{a4653a99-30de-4bf4-95ba-379819fb67ab}</Project>
+      <Name>GameLogic</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

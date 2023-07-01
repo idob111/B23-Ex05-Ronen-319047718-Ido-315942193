@@ -2,17 +2,20 @@
 {
     public class Game
     {
-        private const string k_GameQuitMessage = "Quitting";
         private const string k_BoardFullMessage = "Board full. No Winners.";
         private readonly Player r_FirstPlayer = new Player(ePlayers.PlayerOne, 0, eCellType.Cross);
 
-        private Player m_CurrentPlayer;
-        private bool m_QuitGame, m_GameEnded;
         private int m_BoardSize;
         private Board m_Board;
-        private Player m_SecondPlayer = null;
-        private AiPlayer m_AiPlayer = null;
+        private Player m_SecondPlayer;
+        private AiPlayer m_AiPlayer;
+        private bool m_GameEnded;
         private string m_EndingMessage = string.Empty;
+        private Player m_CurrentPlayer;
+
+        public Player CurrentPlayer => m_CurrentPlayer;
+        public bool GameEnded => m_GameEnded;
+        public string EndingMessage => m_EndingMessage;
 
         public enum eMode
         {
@@ -23,173 +26,62 @@
 
         public Game()
         {
-            m_QuitGame = false;
             m_GameEnded = false;
             m_BoardSize = 0;
             m_CurrentPlayer = r_FirstPlayer;
             m_Board = null;
         }
 
-        // Game loop
-        public void RunGame()
+        // Initializes the game board and the players.
+        public void InitGame(int i_BoardSize, bool i_IsGameAgainstPlayer)
         {
-            m_BoardSize = IO.GetBoardSizeInput();
-            if (isUserExit())
+            eMode gameMode;
+            if (i_IsGameAgainstPlayer)
             {
-                m_EndingMessage = k_GameQuitMessage;
-                IO.PrintGameEndedMessage(m_EndingMessage);
+                gameMode = eMode.Human;
             }
             else
             {
-                eMode gameMode = IO.GetPlayingMode();
-                switch (gameMode)
-                {
-                    case eMode.Exit:
-                        m_EndingMessage = k_GameQuitMessage;
-                        IO.PrintGameEndedMessage(m_EndingMessage);
-                        break;
-                    case eMode.Human:
-                        m_SecondPlayer = new Player(ePlayers.PlayerTwo, 0, eCellType.Circle);
-                        HumanGameManagementHandler();
-                        break;
-                    case eMode.Computer:
-                        m_AiPlayer = new AiPlayer(ePlayers.PlayerTwo, 0, eCellType.Circle);
-                        m_SecondPlayer = m_AiPlayer.PlayerData;
-                        AiGameManagementHandler();
-                        break;
-                }
+                gameMode = eMode.Computer;
+            }
+
+            m_BoardSize = i_BoardSize;
+            m_Board = new Board(i_BoardSize);
+            switch (gameMode)
+            {
+                case eMode.Human:
+                    m_SecondPlayer = new Player(ePlayers.PlayerTwo, 0, eCellType.Circle);
+                    break;
+                case eMode.Computer:
+                    m_AiPlayer = new AiPlayer(ePlayers.PlayerTwo, 0, eCellType.Circle);
+                    m_SecondPlayer = m_AiPlayer.PlayerData;
+                    break;
             }
         }
-        //Validate user does not exit when create new board
-        private bool isUserExit()
+
+        // Receive the index of the button pressed and update it in the logic game board
+        public void HumanTurn(PointIndex i_PlayerMove)
         {
-            return m_BoardSize == -1;
-        }
-
-        // The handler of the main game loop
-        // 1) If the player entered q when prompted to get board size the game is terminated here.
-        // 2) Player makes a move and it gets validated.
-        // 3) The move is then updated in the board.
-        // 4) And the player is changed at the end of the turn
-        // 5) If the game ended then it will print out the board and reason (board full, win, quitting etc)
-        // 6) If the player didn't quit then the game restarts.
-        private void HumanGameManagementHandler()
-        {
-            if (isUserExit())
-            {
-                m_QuitGame = true;
-            }
-
-            m_Board = new Board(m_BoardSize);
-            while (!m_QuitGame)
-            {
-                do
-                {
-                    IO.PrintGameBoard(m_Board, r_FirstPlayer, m_SecondPlayer);
-                    PointIndex playerMove = getCurrentPlayerMove();
-
-                    if (!m_QuitGame)
-                    {
-                        updateBoardAndPlayers(playerMove);
-                        changePlayer();
-                    }
-
-                }
-                while (!isGameEnded());
-
-                IO.PrintGameBoard(m_Board, r_FirstPlayer, m_SecondPlayer);
-                IO.PrintGameEndedMessage(m_EndingMessage);
-                resetGame();
-            }
+            updateBoardAndPlayers(i_PlayerMove);
+            changePlayer();
         }
 
         // 1) Prints the current game board and prompts the player to make a move.
         // 2) Receives Player position input and validates it (valid location and valid string)
-        private PointIndex getCurrentPlayerMove()
+        //private PointIndex getCurrentPlayerMove()
+        //{
+        //    PointIndex playerMove;
+        //    playerMove = m_CurrentPlayer.PlayTurn(m_Board, r_FirstPlayer, m_SecondPlayer);
+
+        //    return playerMove;
+        //}
+
+        // Ai does it's move and updates it on the logical board
+        public void aiTurn()
         {
-            PointIndex playerMove;
-            do
-            {
-                playerMove = m_CurrentPlayer.PlayTurn(m_Board, r_FirstPlayer, m_SecondPlayer);
-
-                if (playerMove.IsQuitting())
-                {
-                    m_QuitGame = true;
-                }
-            }
-            while (!isPlayerMoveValid(playerMove));
-
-            return playerMove;
-        }
-
-        // Checks that the move is within board bounds and isn't played on a taken cell.
-        private bool isPlayerMoveValid(PointIndex i_PlayerMove)
-        {
-            bool moveValid = true;
-            string errorMessage = string.Empty;
-            int boardSize = m_Board.BoardSize;
-
-            bool isQuitting = i_PlayerMove.IsQuitting();
-
-            if (!isQuitting && !i_PlayerMove.IsInBounds(boardSize))
-            {
-                moveValid = false;
-                errorMessage = "Cell out of bounds.";
-            }
-            else if (!isQuitting && !m_Board.IsCellEmpty(i_PlayerMove))
-            {
-                moveValid = false;
-                errorMessage = "Cell is occupied";
-            }
-
-            if (moveValid == false)
-            {
-                IO.PrintBoardWithErrors(m_Board, m_CurrentPlayer, errorMessage, r_FirstPlayer, m_SecondPlayer);
-            }
-
-            return moveValid;
-        }
-
-        // Handle a game against AI computer
-        private void AiGameManagementHandler()
-        {
-            if (isUserExit())
-            {
-                m_QuitGame = true;
-            }
-
-            PointIndex playerMove;
-            m_Board = new Board(m_BoardSize);
-            while (!m_QuitGame)
-            {
-                do
-                {
-                    if (m_CurrentPlayer.PlayerId == m_AiPlayer.Id)
-                    {
-                        playerMove = m_AiPlayer.PlayTurn(m_Board, m_BoardSize);
-                    }
-                    else
-                    {
-                        IO.PrintGameBoard(m_Board, r_FirstPlayer, m_SecondPlayer);
-                        playerMove = getCurrentPlayerMove();
-                    }
-
-                    if (!m_QuitGame)
-                    {
-                        PointIndex pointIndex = new PointIndex(playerMove.Row, playerMove.Column);
-                        updateBoardAndPlayers(pointIndex);
-                        changePlayer();
-                    }
-                }
-                while (!isGameEnded());
-
-                IO.PrintGameBoard(m_Board, r_FirstPlayer, m_SecondPlayer);
-                IO.PrintGameEndedMessage(m_EndingMessage);
-                if (!m_QuitGame)
-                {
-                    resetGame();
-                }
-            }
+            PointIndex playerMove = m_AiPlayer.PlayTurn(m_Board, m_BoardSize);
+            updateBoardAndPlayers(playerMove);
+            changePlayer();
         }
 
         // Updates the board and ends the game if the player lost. If player won then updates his score.
@@ -246,12 +138,6 @@
         // Returns true or false based on if the game ended.
         private bool isGameEnded()
         {
-            if (m_QuitGame == true)
-            {
-                m_GameEnded = true;
-                m_EndingMessage = k_GameQuitMessage;
-            }
-
             if (m_Board.TurnsLeft == 0 && !m_GameEnded) // If there are no moves and the game didn't end because someone won
             {
                 m_GameEnded = true;
@@ -261,7 +147,7 @@
             return m_GameEnded;
         }
 
-        // Restes the game board and keeps the score as is
+        // Resets the game board and keeps the score as is
         private void resetGame()
         {
             m_Board.ResetBoard();
