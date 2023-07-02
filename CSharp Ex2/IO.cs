@@ -15,7 +15,7 @@ namespace CSharp_Ex2
             {
                 Console.Write("Please enter board size: ");
                 userBoardSizeInputStr = Console.ReadLine();
-                Ex02.ConsoleUtils.Screen.Clear();
+                //Ex02.ConsoleUtils.Screen.Clear();
             }
             while (!isBoardSizeInputValid(userBoardSizeInputStr, out boardSize));
 
@@ -132,7 +132,7 @@ namespace CSharp_Ex2
             }
             else
             {
-                Ex02.ConsoleUtils.Screen.Clear();
+                //Ex02.ConsoleUtils.Screen.Clear();
                 printErrorMessage("Unsupported mode");
             }
 
@@ -178,7 +178,7 @@ namespace CSharp_Ex2
         // Prints out the Game Board
         public static void PrintGameBoard(Board i_GameBoard, Player i_FirstPlayer, Player i_SecondPlayer)
         {
-            Ex02.ConsoleUtils.Screen.Clear();
+            //Ex02.ConsoleUtils.Screen.Clear();
 
             int boardSize = i_GameBoard.BoardSize;
             Console.WriteLine($"{i_FirstPlayer}: {i_FirstPlayer.Score}    {i_SecondPlayer}: {i_SecondPlayer.Score}\n");

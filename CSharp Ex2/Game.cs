@@ -17,6 +17,9 @@
         public bool GameEnded => m_GameEnded;
         public string EndingMessage => m_EndingMessage;
 
+        public int Player1Score => r_FirstPlayer.Score;
+        public int Player2Score => m_SecondPlayer.Score;
+
         public enum eMode
         {
             Human,
@@ -148,7 +151,7 @@
         }
 
         // Resets the game board and keeps the score as is
-        private void resetGame()
+        public void ResetGame()
         {
             m_Board.ResetBoard();
             m_GameEnded = false;

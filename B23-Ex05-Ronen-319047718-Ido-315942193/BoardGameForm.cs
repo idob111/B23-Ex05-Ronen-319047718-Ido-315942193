@@ -15,11 +15,7 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
             InitializeComponent(i_Settings);
             CreateButtonsTable(i_Settings.NumberOfRows, i_Settings.NumberOfCols);
             GameManager.InitGame(i_Settings);
-        }
-
-        private void BoardGameForm_Load(object sender, EventArgs e)
-        {
-
+            CreateScoreTracking(i_Settings);
         }
     }
 }
