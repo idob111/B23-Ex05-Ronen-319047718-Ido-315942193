@@ -15,6 +15,7 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
         private const int k_ButtonWidth = 50;
         private const int k_ButtonHeight = 50;
         private const int k_ButtonMargin = 5;
+        private const int k_LabelMargin = 30;
 
         private Label Player1NameLabel = new Label();
         private Label Player2NameLabel = new Label();
@@ -68,13 +69,14 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
                     button.Top = row * (k_ButtonHeight + k_ButtonMargin) + k_ButtonMargin;
                     button.Left = col * (k_ButtonWidth + k_ButtonMargin) + k_ButtonMargin;
                     button.Click += ButtonCell_Click;
+                    button.TabStop = false;
                     buttonPointIndexDictionary.Add(button, new PointIndex(row, col));
                     Controls.Add(button);
                 }
             }
 
             int formWidth = (int)i_Cols * (k_ButtonWidth + k_ButtonMargin) + k_ButtonMargin;
-            int formHeight = (int)i_Rows * (k_ButtonHeight + k_ButtonMargin) + k_ButtonMargin;
+            int formHeight = (int)i_Rows * (k_ButtonHeight + k_ButtonMargin) + k_ButtonMargin + k_LabelMargin;
             this.ClientSize = new Size(formWidth, formHeight);
         }
 
@@ -99,16 +101,22 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
 
             Player1NameLabel.Show();
             Player2NameLabel.Show();
+
+            Controls.Add(Player1NameLabel);
+            Controls.Add(Player2NameLabel);
         }
 
         private void ButtonCell_Click(object sender, EventArgs e)
         {
             // Handle button click event
-            Button clickedButton = (Button)sender;
-            clickedButton.Enabled = false;
+            Button clickedButton = sender as Button;
+            if (sender != null)
+            {
+                clickedButton.Enabled = false;
 
-            // Passes the button's row and col to play human turn
-            GameManager.playHumanTurn(buttonPointIndexDictionary[clickedButton], clickedButton);
+                // Passes the button's row and col to play human turn
+                GameManager.playHumanTurn(buttonPointIndexDictionary[clickedButton], clickedButton);
+            }
         }
 
         #endregion

@@ -11,7 +11,6 @@ namespace B23_Ex05_Ronen_319047718_Ido_315942193
     public static class GameManager
     {
         private static Game m_Game;
-        private static Button[,] m_ButtonBoard = null;
         public static Player CurrentPlayer => m_Game.CurrentPlayer;
         private static GameSettings m_GameSettings;
 
@@ -30,6 +29,7 @@ namespace B23_Ex05_Ronen_319047718_Ido_315942193
         // Updates the logic game board according to the player's chosen move
         public static void playHumanTurn(PointIndex i_ButtonPointIndex,Button i_ClickedButton)
         {
+            // TODO: Move to the form. We should actually implement the bonus Guy gave in the task file. It will deal with this much better.
             switch (m_Game.CurrentPlayer.PlayerId)
             {
                 case ePlayers.PlayerOne:
@@ -66,9 +66,7 @@ namespace B23_Ex05_Ronen_319047718_Ido_315942193
         {
             m_Game.ResetGame();
 
-            // TODO: This doesn't work currently, need to find another way to reset the form
-            BoardGameForm.ActiveForm.Dispose();
-            Application.Run(new BoardGameForm(m_GameSettings));
+            // TODO: Reset all buttons in BoardGameForm.designer.cs
         }
     }
 }
