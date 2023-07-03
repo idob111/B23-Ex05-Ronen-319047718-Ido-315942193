@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "B23-Ex05-Ronen-319047718-Ido-315942193", "B23-Ex05-Ronen-319047718-Ido-315942193\B23-Ex05-Ronen-319047718-Ido-315942193.csproj", "{33D74DF9-8252-4B42-A7E9-C0FA81CDDCF1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameDesign", "B23-Ex05-Ronen-319047718-Ido-315942193\GameDesign.csproj", "{33D74DF9-8252-4B42-A7E9-C0FA81CDDCF1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLogic", "CSharp Ex2\GameLogic.csproj", "{A4653A99-30DE-4BF4-95BA-379819FB67AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{33D74DF9-8252-4B42-A7E9-C0FA81CDDCF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33D74DF9-8252-4B42-A7E9-C0FA81CDDCF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33D74DF9-8252-4B42-A7E9-C0FA81CDDCF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4653A99-30DE-4BF4-95BA-379819FB67AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4653A99-30DE-4BF4-95BA-379819FB67AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4653A99-30DE-4BF4-95BA-379819FB67AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4653A99-30DE-4BF4-95BA-379819FB67AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

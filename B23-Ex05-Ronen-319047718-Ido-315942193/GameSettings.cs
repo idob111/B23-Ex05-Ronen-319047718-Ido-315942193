@@ -11,15 +11,15 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
         private readonly string m_PlayerTwoName;
         private readonly decimal m_NumberOfRows;
         private readonly decimal m_NumberOfCols;
-        private readonly bool m_IsModeAgainstComputer;
+        private readonly bool m_IsModeAgainstPlayer;
 
-        public GameSettings(string i_PlayerOneName, string i_PlayerTwoName, decimal i_NumberOfRows, decimal i_NumberOfCols, bool i_IsModeAgainstComputer)
+        public GameSettings(string i_PlayerOneName, string i_PlayerTwoName, decimal i_NumberOfRows, decimal i_NumberOfCols, bool i_IsModeAgainstPlayer)
         {
             m_PlayerOneName = i_PlayerOneName;
             m_PlayerTwoName = i_PlayerTwoName;
             m_NumberOfRows = i_NumberOfRows;
             m_NumberOfCols = i_NumberOfCols;
-            m_IsModeAgainstComputer = i_IsModeAgainstComputer;
+            m_IsModeAgainstPlayer = i_IsModeAgainstPlayer;
         }
 
         public string PlayerOneName => m_PlayerOneName;
@@ -30,6 +30,6 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
 
         public decimal NumberOfCols => m_NumberOfCols;
 
-        public bool IsModeAgainstComputer => m_IsModeAgainstComputer;
+        public bool IsModeAgainstPlayer => m_IsModeAgainstPlayer;
     }
 }

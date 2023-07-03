@@ -40,8 +40,7 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
                 m_NumericUpDownColsAmount.Value,
                 m_CheckBoxIsPlayingMode.Checked);
 
-            this.Close();
-
+            Close();
         }
     }
 }
