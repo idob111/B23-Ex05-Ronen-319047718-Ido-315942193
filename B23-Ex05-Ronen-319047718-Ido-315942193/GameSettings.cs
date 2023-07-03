@@ -31,5 +31,6 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
         public decimal NumberOfCols => m_NumberOfCols;
 
         public bool IsModeAgainstPlayer => m_IsModeAgainstPlayer;
+
     }
 }

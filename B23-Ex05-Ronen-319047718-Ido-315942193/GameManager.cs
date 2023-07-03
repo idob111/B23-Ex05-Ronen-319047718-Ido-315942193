@@ -8,26 +8,20 @@ using CSharp_Ex2;
 
 namespace B23_Ex05_Ronen_319047718_Ido_315942193
 {
-    public static class GameManager
+    public class GameManager
     {
-        private static Game m_Game;
-        public static Player CurrentPlayer => m_Game.CurrentPlayer;
-        private static GameSettings m_GameSettings;
-
-        public static int Player1Score => m_Game.Player1Score;
-        public static int Player2Score => m_Game.Player2Score;
+        private Game m_Game;
 
         // Starts a new game with the given settings
-        public static void InitGame(GameSettings i_Settings)
+        public GameManager(GameSettings i_Settings)
         {
             m_Game = new Game();
             m_Game.InitGame((int)i_Settings.NumberOfRows, i_Settings.IsModeAgainstPlayer);
-            m_GameSettings = i_Settings;
         }
 
-        
+
         // Updates the logic game board according to the player's chosen move
-        public static void playHumanTurn(PointIndex i_ButtonPointIndex,Button i_ClickedButton)
+        public void playHumanTurn(PointIndex i_ButtonPointIndex, Button i_ClickedButton)
         {
             // TODO: Move to the form. We should actually implement the bonus Guy gave in the task file. It will deal with this much better.
             switch (m_Game.CurrentPlayer.PlayerId)
@@ -41,7 +35,15 @@ namespace B23_Ex05_Ronen_319047718_Ido_315942193
             }
 
             m_Game.HumanTurn(i_ButtonPointIndex);
-            checkGameEnded();
+        }
+
+        public int PlayerOneScore()
+        {
+            return m_Game.GetScoringByPlayerId(ePlayers.PlayerOne);
+        }
+        public int PlayerTwoScore()
+        {
+            return m_Game.GetScoringByPlayerId(ePlayers.PlayerTwo);
         }
 
         // TODO: Add listener for AI to play a turn 
@@ -52,17 +54,20 @@ namespace B23_Ex05_Ronen_319047718_Ido_315942193
         }
 
         // If the game ended shows a game ended message and resets the game
-        private static void checkGameEnded()
+        public bool checkGameEnded()
         {
+            bool isGameEnded = false;
             if (m_Game.GameEnded)
             {
                 MessageBox.Show(m_Game.EndingMessage, string.Empty, MessageBoxButtons.OK);
                 resetGame();
+                isGameEnded = true;
             }
+            return isGameEnded;
         }
 
         // Resets the game Both logically and visually
-        private static void resetGame()
+        private void resetGame()
         {
             m_Game.ResetGame();
 

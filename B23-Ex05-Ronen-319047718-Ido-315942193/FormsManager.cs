@@ -18,6 +18,10 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
                 settings = gameSettingsForm.Settings;
                 try
                 {
+                    if (settings == null)
+                    {
+                        Environment.Exit(0);
+                    }
                     validateSettings(settings);
                 }
                 catch (Exception e)
@@ -26,14 +30,16 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
                     settings = null;
                 }
             } while (settings == null);
+            BoardGameForm boardGameForm = new BoardGameForm(settings);
+            boardGameForm.runBoard();
+            
 
-            Application.Run(new BoardGameForm(settings));
         }
 
         private static void validateSettings(GameSettings i_Settings)
         {
             string k_NoPlayerNameMsg = "Player name cannot be empty";
-            if(i_Settings.PlayerOneName == string.Empty)
+            if (i_Settings.PlayerOneName == string.Empty)
             {
                 throw new FormatException(k_NoPlayerNameMsg);
             }
@@ -43,7 +49,7 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
                 throw new FormatException(k_NoPlayerNameMsg);
             }
 
-            if(i_Settings.NumberOfRows != i_Settings.NumberOfCols)
+            if (i_Settings.NumberOfRows != i_Settings.NumberOfCols)
             {
                 throw new ArgumentException("Number of rows must match number of cols");
             }
