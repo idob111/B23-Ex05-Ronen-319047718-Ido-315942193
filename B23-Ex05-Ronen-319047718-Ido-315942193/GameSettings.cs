@@ -5,6 +5,7 @@ using System.Text;
 
 namespace B23_Ex02_Ronen_319047718_Ido_315942193
 {
+    //This class should be the user configurations from the settings form.
     public class GameSettings
     {
         private readonly string m_PlayerOneName;

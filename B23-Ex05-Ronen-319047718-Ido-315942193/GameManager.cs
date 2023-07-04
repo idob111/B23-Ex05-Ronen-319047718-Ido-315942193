@@ -30,6 +30,7 @@ namespace B23_Ex05_Ronen_319047718_Ido_315942193
             r_GameBoardForm.changeHighlightedPlayer(m_Game.CurrentPlayer.PlayerId);
         }
 
+        //Change given button text
         private void changeButtonText(Button i_ClickedButton)
         {
             switch (m_Game.CurrentPlayer.PlayerId)
@@ -42,11 +43,13 @@ namespace B23_Ex05_Ronen_319047718_Ido_315942193
                     break;
             }
         }
-
+        
+        //return the scoring of player one
         public int PlayerOneScore()
         {
             return m_Game.GetScoringByPlayerId(ePlayers.PlayerOne);
         }
+        //return the scoring of player Two
         public int PlayerTwoScore()
         {
             return m_Game.GetScoringByPlayerId(ePlayers.PlayerTwo);
