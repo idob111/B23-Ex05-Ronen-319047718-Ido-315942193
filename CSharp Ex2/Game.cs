@@ -17,9 +17,6 @@
         public bool GameEnded => m_GameEnded;
         public string EndingMessage => m_EndingMessage;
 
-        public int Player1Score => r_FirstPlayer.Score;
-        public int Player2Score => m_SecondPlayer.Score;
-
         public enum eMode
         {
             Human,
@@ -34,6 +31,21 @@
             m_CurrentPlayer = r_FirstPlayer;
             m_Board = null;
         }
+
+        public int GetScoringByPlayerId(ePlayers i_PlayerId)
+        {
+            int score;
+            if (i_PlayerId.Equals(ePlayers.PlayerOne))
+            {
+                score = r_FirstPlayer.Score;
+            }
+            else
+            {
+                score = m_SecondPlayer.Score;
+            }
+            return score;
+        }
+
 
         // Initializes the game board and the players.
         public void InitGame(int i_BoardSize, bool i_IsGameAgainstPlayer)
@@ -96,7 +108,7 @@
             if (m_GameEnded)
             {
                 changePlayer();
-                m_CurrentPlayer.Score++;
+                CurrentPlayer.Score++;
                 m_EndingMessage = string.Format("{0} Won!", m_CurrentPlayer.ToString());
             }
         }

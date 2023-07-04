@@ -162,7 +162,7 @@ namespace CSharp_Ex2
             {
                 for (int colIndex = 0; colIndex < i_BoardSize; colIndex++)
                 {
-                    m_BoardCells[rowIndex, colIndex] = eCellType.Empty;
+                    m_BoardCells[rowIndex, colIndex] = eCellType.Empty;   
                 }
             }
         }

@@ -51,7 +51,6 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
             // 
             // BoardGameForm
             // 
-            this.ClientSize = new System.Drawing.Size(282, 253);
             this.Name = "BoardGameForm";
             this.ResumeLayout(false);
         }
@@ -75,8 +74,8 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
                 }
             }
 
-            int formWidth = (int)i_Cols * (k_ButtonWidth + k_ButtonMargin) + k_ButtonMargin;
-            int formHeight = (int)i_Rows * (k_ButtonHeight + k_ButtonMargin) + k_ButtonMargin + k_LabelMargin;
+            int formWidth = (int)i_Cols * (k_ButtonWidth + k_ButtonMargin) + k_ButtonMargin + 5;
+            int formHeight = (int)i_Rows * (k_ButtonHeight + k_ButtonMargin) + k_ButtonMargin + k_LabelMargin + 5;
             this.ClientSize = new Size(formWidth, formHeight);
         }
 
@@ -84,26 +83,32 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
         // Until then we need to find some way to see the score tracker. this func DOESN'T work currently...
         private void CreateScoreTracking(GameSettings i_Settings)
         {
-            Player1NameLabel.Text = string.Format("{0}: {1}", i_Settings.PlayerOneName, GameManager.Player1Score);
-            Player2NameLabel.Text = string.Format("{0}: {1}", i_Settings.PlayerTwoName, GameManager.Player2Score);
+            Player1NameLabel.Text = string.Format("{0}: {1}", i_Settings.PlayerOneName, m_GameManager.PlayerOneScore());
+            Player2NameLabel.Text = string.Format("{0}: {1}", i_Settings.PlayerTwoName, m_GameManager.PlayerTwoScore());
 
-            Player1NameLabel.Left = this.Width / 2 - Player1NameLabel.Width - 5;
-            Player2NameLabel.Left = this.Width / 2 + Player1NameLabel.Width + 5;
+            int midScreenWidthIndex = this.ClientSize.Width / 2;
+            int bothLabelLength = i_Settings.PlayerOneName.Length + i_Settings.PlayerTwoName.Length + 10;
+            int firstWidthIndexOfLabels = midScreenWidthIndex - (bothLabelLength * 2);
 
-            Player1NameLabel.Top = this.Height-10;
-            Player2NameLabel.Top = this.Height-10;
+            Player1NameLabel.Top = this.ClientSize.Height - 15;
+            Player2NameLabel.Top = this.ClientSize.Height - 15;
 
             Player1NameLabel.Anchor = AnchorStyles.Bottom;
             Player2NameLabel.Anchor = AnchorStyles.Bottom;
 
+            Player1NameLabel.Width = Player1NameLabel.Text.Length;
+            Player2NameLabel.Width = Player2NameLabel.Text.Length;
+
             Player1NameLabel.AutoSize = true;
             Player2NameLabel.AutoSize = true;
 
-            Player1NameLabel.Show();
-            Player2NameLabel.Show();
+            Player1NameLabel.Left = firstWidthIndexOfLabels;
+            Player2NameLabel.Left = Player1NameLabel.Right + 30;
 
             Controls.Add(Player1NameLabel);
             Controls.Add(Player2NameLabel);
+
+
         }
 
         private void ButtonCell_Click(object sender, EventArgs e)
@@ -115,7 +120,13 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
                 clickedButton.Enabled = false;
 
                 // Passes the button's row and col to play human turn
-                GameManager.playHumanTurn(buttonPointIndexDictionary[clickedButton], clickedButton);
+                m_GameManager.playHumanTurn(buttonPointIndexDictionary[clickedButton], clickedButton);
+                if (m_GameManager.checkGameEnded())
+                {
+                    Controls.Clear();
+                    CreateButtonsTable(m_Settings.NumberOfRows, m_Settings.NumberOfCols);
+                    CreateScoreTracking(m_Settings);
+                }
             }
         }
 

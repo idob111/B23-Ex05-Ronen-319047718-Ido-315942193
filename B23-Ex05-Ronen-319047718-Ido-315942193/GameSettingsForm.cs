@@ -17,6 +17,7 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
         public GameSettingForm()
         {
             InitializeComponent();
+            FormClosing += GameSettingForm_FormClosing;
         }
 
         private void CheckBoxIsPlayingMode_CheckedChanged(object sender, EventArgs e)
@@ -33,6 +34,18 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
             }
         }
 
+        private void GameSettingForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                DialogResult result = MessageBox.Show("Are you sure you want to exit?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.No)
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
+
         private void ButtonStartGame_Click(object sender, EventArgs e)
         {
             m_GameSettings = new GameSettings(m_TextBoxPlayerOne.Text,
@@ -40,7 +53,7 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
                 m_NumericUpDownColsAmount.Value,
                 m_CheckBoxIsPlayingMode.Checked);
 
-            Close();
+            this.Dispose();
         }
     }
 }
