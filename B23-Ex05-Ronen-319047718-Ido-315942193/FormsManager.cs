@@ -44,7 +44,7 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
                 throw new FormatException(k_NoPlayerNameMsg);
             }
 
-            if (!playerTwoHasName(i_Settings))
+            if (i_Settings.IsModeAgainstPlayer && !playerTwoHasName(i_Settings))
             {
                 throw new FormatException(k_NoPlayerNameMsg);
             }
@@ -57,7 +57,7 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
 
         private static bool playerTwoHasName(GameSettings i_Settings)
         {
-            return (i_Settings.IsModeAgainstPlayer && (i_Settings.PlayerTwoName != string.Empty));
+            return i_Settings.PlayerTwoName != string.Empty;
         }
     }
 }

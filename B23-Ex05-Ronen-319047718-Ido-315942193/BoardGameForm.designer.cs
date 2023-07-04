@@ -127,16 +127,37 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
             if (sender != null)
             {
                 clickedButton.Enabled = false;
-
                 // Passes the button's row and col to play human turn
                 m_GameManager.playHumanTurn(buttonPointIndexDictionary[clickedButton], clickedButton);
                 if (m_GameManager.checkGameEnded())
                 {
-                    Controls.Clear();
-                    CreateButtonsTable(m_Settings.NumberOfRows, m_Settings.NumberOfCols);
-                    CreateScoreTracking(m_Settings);
+                    handleEndGame();
+                }
+                else if (!m_Settings.IsModeAgainstPlayer)
+                {
+                    PointIndex aiMoveIndex = m_GameManager.playAiTurn();
+                    updateAiButton(aiMoveIndex);
+                    if (m_GameManager.checkGameEnded())
+                    {
+                        handleEndGame();
+                    }
                 }
             }
+        }
+
+        private void handleEndGame()
+        {
+            Controls.Clear();
+            buttonPointIndexDictionary.Clear();
+            CreateButtonsTable(m_Settings.NumberOfRows, m_Settings.NumberOfCols);
+            CreateScoreTracking(m_Settings);
+        }
+
+        private void updateAiButton(PointIndex aiMoveIndex)
+        {
+            Button aiButtonClicked = buttonPointIndexDictionary.FirstOrDefault(x => x.Value.Equals(aiMoveIndex)).Key;
+            aiButtonClicked.Enabled = false;
+            aiButtonClicked.Text = "O";
         }
 
         // Highlights the current player
