@@ -14,7 +14,7 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
         public BoardGameForm(GameSettings i_Settings)
         {
             m_Settings = i_Settings;
-            m_GameManager = new GameManager(i_Settings);
+            m_GameManager = new GameManager(i_Settings, this);
 
         }
 

@@ -11,12 +11,15 @@ namespace B23_Ex05_Ronen_319047718_Ido_315942193
     public class GameManager
     {
         private Game m_Game;
+        private readonly BoardGameForm r_GameBoardForm;
 
         // Starts a new game with the given settings
-        public GameManager(GameSettings i_Settings)
+        public GameManager(GameSettings i_Settings, BoardGameForm i_BoardGameForm)
         {
             m_Game = new Game();
             m_Game.InitGame((int)i_Settings.NumberOfRows, i_Settings.IsModeAgainstPlayer);
+            r_GameBoardForm = i_BoardGameForm;
+            r_GameBoardForm.changeHighlightedPlayer(m_Game.CurrentPlayer.PlayerId);
         }
 
 
@@ -35,6 +38,7 @@ namespace B23_Ex05_Ronen_319047718_Ido_315942193
             }
 
             m_Game.HumanTurn(i_ButtonPointIndex);
+            r_GameBoardForm.changeHighlightedPlayer(m_Game.CurrentPlayer.PlayerId);
         }
 
         public int PlayerOneScore()

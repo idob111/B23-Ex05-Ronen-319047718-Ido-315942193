@@ -51,8 +51,12 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
             // 
             // BoardGameForm
             // 
+            this.ClientSize = new System.Drawing.Size(282, 253);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.MaximizeBox = false;
             this.Name = "BoardGameForm";
             this.ResumeLayout(false);
+
         }
 
 
@@ -74,8 +78,9 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
                 }
             }
 
-            int formWidth = (int)i_Cols * (k_ButtonWidth + k_ButtonMargin) + k_ButtonMargin + 5;
-            int formHeight = (int)i_Rows * (k_ButtonHeight + k_ButtonMargin) + k_ButtonMargin + k_LabelMargin + 5;
+            int formMargin = 5;
+            int formWidth = (int)i_Cols * (k_ButtonWidth + k_ButtonMargin) + k_ButtonMargin + formMargin;
+            int formHeight = (int)i_Rows * (k_ButtonHeight + k_ButtonMargin) + k_ButtonMargin + k_LabelMargin + formMargin;
             this.ClientSize = new Size(formWidth, formHeight);
         }
 
@@ -83,32 +88,36 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
         // Until then we need to find some way to see the score tracker. this func DOESN'T work currently...
         private void CreateScoreTracking(GameSettings i_Settings)
         {
-            Player1NameLabel.Text = string.Format("{0}: {1}", i_Settings.PlayerOneName, m_GameManager.PlayerOneScore());
-            Player2NameLabel.Text = string.Format("{0}: {1}", i_Settings.PlayerTwoName, m_GameManager.PlayerTwoScore());
+            setNameLabelProperties(Player1NameLabel, string.Format("{0}: {1}", i_Settings.PlayerOneName, m_GameManager.PlayerOneScore()));
+            setNameLabelProperties(Player2NameLabel, string.Format("{0}: {1}", i_Settings.PlayerTwoName, m_GameManager.PlayerTwoScore()));
 
-            int midScreenWidthIndex = this.ClientSize.Width / 2;
-            int bothLabelLength = i_Settings.PlayerOneName.Length + i_Settings.PlayerTwoName.Length + 10;
-            int firstWidthIndexOfLabels = midScreenWidthIndex - (bothLabelLength * 2);
+            int formMiddle = this.ClientSize.Width / 2;
+            int labelSpacing = 20;
+            int bothLabelsWidth = Player1NameLabel.Width + Player2NameLabel.Width + labelSpacing;
+            int p1NameLabelLeftMargin = formMiddle - (bothLabelsWidth / 2);
 
-            Player1NameLabel.Top = this.ClientSize.Height - 15;
-            Player2NameLabel.Top = this.ClientSize.Height - 15;
-
-            Player1NameLabel.Anchor = AnchorStyles.Bottom;
-            Player2NameLabel.Anchor = AnchorStyles.Bottom;
-
-            Player1NameLabel.Width = Player1NameLabel.Text.Length;
-            Player2NameLabel.Width = Player2NameLabel.Text.Length;
-
-            Player1NameLabel.AutoSize = true;
-            Player2NameLabel.AutoSize = true;
-
-            Player1NameLabel.Left = firstWidthIndexOfLabels;
-            Player2NameLabel.Left = Player1NameLabel.Right + 30;
+            Player1NameLabel.Left = p1NameLabelLeftMargin;
+            Player2NameLabel.Left = Player1NameLabel.Right + labelSpacing;
 
             Controls.Add(Player1NameLabel);
             Controls.Add(Player2NameLabel);
+        }
 
+        // Sets the given player's name label to the required properties
+        private void setNameLabelProperties(Label i_Label, string i_LabelText)
+        {
+            i_Label.Text = i_LabelText;
 
+            int bottomMargin = 15;
+            i_Label.Top = this.ClientSize.Height - bottomMargin;
+
+            i_Label.Anchor = AnchorStyles.Bottom;
+
+            Size labelTextSize = TextRenderer.MeasureText(i_Label.Text, i_Label.Font);
+            int labelWidthPadding = 10;
+            int labelWidth = labelTextSize.Width + labelWidthPadding;
+
+            i_Label.Size = new Size(labelWidth, labelTextSize.Height);
         }
 
         private void ButtonCell_Click(object sender, EventArgs e)
@@ -128,6 +137,26 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
                     CreateScoreTracking(m_Settings);
                 }
             }
+        }
+
+        // Highlights the current player
+        public void changeHighlightedPlayer(ePlayers i_CurrPlayer)
+        {
+            switch (i_CurrPlayer)
+            {
+                case ePlayers.PlayerOne:
+                    switchLabelBold(Player1NameLabel, Player2NameLabel);
+                    break;
+                case ePlayers.PlayerTwo:
+                    switchLabelBold(Player2NameLabel, Player1NameLabel);
+                    break;
+            }
+        }
+
+        private void switchLabelBold(Label i_ToBold, Label i_ToRegular)
+        {
+            i_ToBold.Font = new Font(i_ToBold.Font, FontStyle.Bold);
+            i_ToRegular.Font = new Font(i_ToRegular.Font, FontStyle.Regular);
         }
 
         #endregion
