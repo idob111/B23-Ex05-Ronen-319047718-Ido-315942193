@@ -48,7 +48,6 @@ namespace GameDesign
             }
         }
 
-
         //Change given button text based on the current player
         private void changeButtonText(Button i_ClickedButton)
         {
