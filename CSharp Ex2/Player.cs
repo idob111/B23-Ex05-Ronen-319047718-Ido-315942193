@@ -10,7 +10,6 @@
     {
         private ePlayers m_PlayerId;
         private int m_Score;
-        private eCellType m_CellType;
         private string m_Name;
 
         public string Name => m_Name;
@@ -19,7 +18,6 @@
         {
             m_PlayerId = i_PlayerId;
             m_Score = i_Score;
-            m_CellType = i_CellType;
             m_Name = i_Name;
         }
 

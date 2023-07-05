@@ -68,7 +68,7 @@
             // 
             this.m_CheckBoxIsPlayingMode.AutoSize = true;
             this.m_CheckBoxIsPlayingMode.Location = new System.Drawing.Point(24, 71);
-            this.m_CheckBoxIsPlayingMode.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.m_CheckBoxIsPlayingMode.Margin = new System.Windows.Forms.Padding(2);
             this.m_CheckBoxIsPlayingMode.Name = "m_CheckBoxIsPlayingMode";
             this.m_CheckBoxIsPlayingMode.Size = new System.Drawing.Size(18, 17);
             this.m_CheckBoxIsPlayingMode.TabIndex = 1;
@@ -88,7 +88,8 @@
             // m_TextBoxPlayerOne
             // 
             this.m_TextBoxPlayerOne.Location = new System.Drawing.Point(111, 43);
-            this.m_TextBoxPlayerOne.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.m_TextBoxPlayerOne.Margin = new System.Windows.Forms.Padding(2);
+            this.m_TextBoxPlayerOne.MaxLength = 12;
             this.m_TextBoxPlayerOne.Name = "m_TextBoxPlayerOne";
             this.m_TextBoxPlayerOne.Size = new System.Drawing.Size(101, 22);
             this.m_TextBoxPlayerOne.TabIndex = 0;
@@ -97,7 +98,8 @@
             // 
             this.m_TextBoxPlayerTwo.Enabled = false;
             this.m_TextBoxPlayerTwo.Location = new System.Drawing.Point(111, 71);
-            this.m_TextBoxPlayerTwo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.m_TextBoxPlayerTwo.Margin = new System.Windows.Forms.Padding(2);
+            this.m_TextBoxPlayerTwo.MaxLength = 12;
             this.m_TextBoxPlayerTwo.Name = "m_TextBoxPlayerTwo";
             this.m_TextBoxPlayerTwo.Size = new System.Drawing.Size(101, 22);
             this.m_TextBoxPlayerTwo.TabIndex = 2;
@@ -116,7 +118,7 @@
             // m_NumericUpDownRowsAmount
             // 
             this.m_NumericUpDownRowsAmount.Location = new System.Drawing.Point(63, 156);
-            this.m_NumericUpDownRowsAmount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.m_NumericUpDownRowsAmount.Margin = new System.Windows.Forms.Padding(2);
             this.m_NumericUpDownRowsAmount.Maximum = new decimal(new int[] {
             10,
             0,
@@ -139,7 +141,7 @@
             // m_NumericUpDownColsAmount
             // 
             this.m_NumericUpDownColsAmount.Location = new System.Drawing.Point(177, 156);
-            this.m_NumericUpDownColsAmount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.m_NumericUpDownColsAmount.Margin = new System.Windows.Forms.Padding(2);
             this.m_NumericUpDownColsAmount.Maximum = new decimal(new int[] {
             10,
             0,
@@ -182,7 +184,7 @@
             // m_ButtonStartGame
             // 
             this.m_ButtonStartGame.Location = new System.Drawing.Point(13, 208);
-            this.m_ButtonStartGame.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.m_ButtonStartGame.Margin = new System.Windows.Forms.Padding(2);
             this.m_ButtonStartGame.Name = "m_ButtonStartGame";
             this.m_ButtonStartGame.Size = new System.Drawing.Size(198, 29);
             this.m_ButtonStartGame.TabIndex = 5;
@@ -209,7 +211,7 @@
             this.Controls.Add(this.m_LabelPlayerOne);
             this.Controls.Add(this.m_labelPlayersText);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "GameSettingForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
