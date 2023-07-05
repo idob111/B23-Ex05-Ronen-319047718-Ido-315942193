@@ -50,7 +50,7 @@
             this.m_labelPlayersText.Location = new System.Drawing.Point(8, 17);
             this.m_labelPlayersText.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.m_labelPlayersText.Name = "m_labelPlayersText";
-            this.m_labelPlayersText.Size = new System.Drawing.Size(59, 17);
+            this.m_labelPlayersText.Size = new System.Drawing.Size(50, 15);
             this.m_labelPlayersText.TabIndex = 0;
             this.m_labelPlayersText.Text = "Players:";
             // 
@@ -60,7 +60,7 @@
             this.m_LabelPlayerOne.Location = new System.Drawing.Point(22, 43);
             this.m_LabelPlayerOne.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.m_LabelPlayerOne.Name = "m_LabelPlayerOne";
-            this.m_LabelPlayerOne.Size = new System.Drawing.Size(64, 17);
+            this.m_LabelPlayerOne.Size = new System.Drawing.Size(54, 15);
             this.m_LabelPlayerOne.TabIndex = 1;
             this.m_LabelPlayerOne.Text = "Player 1:";
             // 
@@ -68,7 +68,7 @@
             // 
             this.m_CheckBoxIsPlayingMode.AutoSize = true;
             this.m_CheckBoxIsPlayingMode.Location = new System.Drawing.Point(24, 71);
-            this.m_CheckBoxIsPlayingMode.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.m_CheckBoxIsPlayingMode.Margin = new System.Windows.Forms.Padding(2);
             this.m_CheckBoxIsPlayingMode.Name = "m_CheckBoxIsPlayingMode";
             this.m_CheckBoxIsPlayingMode.Size = new System.Drawing.Size(18, 17);
             this.m_CheckBoxIsPlayingMode.TabIndex = 1;
@@ -81,25 +81,27 @@
             this.m_LabelPlayerTwo.Location = new System.Drawing.Point(42, 71);
             this.m_LabelPlayerTwo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.m_LabelPlayerTwo.Name = "m_LabelPlayerTwo";
-            this.m_LabelPlayerTwo.Size = new System.Drawing.Size(64, 17);
+            this.m_LabelPlayerTwo.Size = new System.Drawing.Size(54, 15);
             this.m_LabelPlayerTwo.TabIndex = 3;
             this.m_LabelPlayerTwo.Text = "Player 2:";
             // 
             // m_TextBoxPlayerOne
             // 
             this.m_TextBoxPlayerOne.Location = new System.Drawing.Point(111, 43);
-            this.m_TextBoxPlayerOne.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.m_TextBoxPlayerOne.Margin = new System.Windows.Forms.Padding(2);
+            this.m_TextBoxPlayerOne.MaxLength = 12;
             this.m_TextBoxPlayerOne.Name = "m_TextBoxPlayerOne";
-            this.m_TextBoxPlayerOne.Size = new System.Drawing.Size(101, 22);
+            this.m_TextBoxPlayerOne.Size = new System.Drawing.Size(101, 20);
             this.m_TextBoxPlayerOne.TabIndex = 0;
             // 
             // m_TextBoxPlayerTwo
             // 
             this.m_TextBoxPlayerTwo.Enabled = false;
             this.m_TextBoxPlayerTwo.Location = new System.Drawing.Point(111, 71);
-            this.m_TextBoxPlayerTwo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.m_TextBoxPlayerTwo.Margin = new System.Windows.Forms.Padding(2);
+            this.m_TextBoxPlayerTwo.MaxLength = 12;
             this.m_TextBoxPlayerTwo.Name = "m_TextBoxPlayerTwo";
-            this.m_TextBoxPlayerTwo.Size = new System.Drawing.Size(101, 22);
+            this.m_TextBoxPlayerTwo.Size = new System.Drawing.Size(101, 20);
             this.m_TextBoxPlayerTwo.TabIndex = 2;
             this.m_TextBoxPlayerTwo.Text = "[Computer]";
             // 
@@ -109,14 +111,14 @@
             this.m_LabelBoardSize.Location = new System.Drawing.Point(10, 128);
             this.m_LabelBoardSize.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.m_LabelBoardSize.Name = "m_LabelBoardSize";
-            this.m_LabelBoardSize.Size = new System.Drawing.Size(81, 17);
+            this.m_LabelBoardSize.Size = new System.Drawing.Size(70, 15);
             this.m_LabelBoardSize.TabIndex = 6;
             this.m_LabelBoardSize.Text = "Board Size:";
             // 
             // m_NumericUpDownRowsAmount
             // 
             this.m_NumericUpDownRowsAmount.Location = new System.Drawing.Point(63, 156);
-            this.m_NumericUpDownRowsAmount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.m_NumericUpDownRowsAmount.Margin = new System.Windows.Forms.Padding(2);
             this.m_NumericUpDownRowsAmount.Maximum = new decimal(new int[] {
             10,
             0,
@@ -128,7 +130,7 @@
             0,
             0});
             this.m_NumericUpDownRowsAmount.Name = "m_NumericUpDownRowsAmount";
-            this.m_NumericUpDownRowsAmount.Size = new System.Drawing.Size(34, 22);
+            this.m_NumericUpDownRowsAmount.Size = new System.Drawing.Size(34, 20);
             this.m_NumericUpDownRowsAmount.TabIndex = 3;
             this.m_NumericUpDownRowsAmount.Value = new decimal(new int[] {
             4,
@@ -139,7 +141,7 @@
             // m_NumericUpDownColsAmount
             // 
             this.m_NumericUpDownColsAmount.Location = new System.Drawing.Point(177, 156);
-            this.m_NumericUpDownColsAmount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.m_NumericUpDownColsAmount.Margin = new System.Windows.Forms.Padding(2);
             this.m_NumericUpDownColsAmount.Maximum = new decimal(new int[] {
             10,
             0,
@@ -151,7 +153,7 @@
             0,
             0});
             this.m_NumericUpDownColsAmount.Name = "m_NumericUpDownColsAmount";
-            this.m_NumericUpDownColsAmount.Size = new System.Drawing.Size(34, 22);
+            this.m_NumericUpDownColsAmount.Size = new System.Drawing.Size(34, 20);
             this.m_NumericUpDownColsAmount.TabIndex = 4;
             this.m_NumericUpDownColsAmount.Value = new decimal(new int[] {
             7,
@@ -165,7 +167,7 @@
             this.m_LabelRows.Location = new System.Drawing.Point(24, 158);
             this.m_LabelRows.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.m_LabelRows.Name = "m_LabelRows";
-            this.m_LabelRows.Size = new System.Drawing.Size(46, 17);
+            this.m_LabelRows.Size = new System.Drawing.Size(41, 15);
             this.m_LabelRows.TabIndex = 7;
             this.m_LabelRows.Text = "Rows:";
             // 
@@ -175,14 +177,14 @@
             this.m_LabelCols.Location = new System.Drawing.Point(138, 158);
             this.m_LabelCols.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.m_LabelCols.Name = "m_LabelCols";
-            this.m_LabelCols.Size = new System.Drawing.Size(39, 17);
+            this.m_LabelCols.Size = new System.Drawing.Size(34, 15);
             this.m_LabelCols.TabIndex = 9;
             this.m_LabelCols.Text = "Cols:";
             // 
             // m_ButtonStartGame
             // 
             this.m_ButtonStartGame.Location = new System.Drawing.Point(13, 208);
-            this.m_ButtonStartGame.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.m_ButtonStartGame.Margin = new System.Windows.Forms.Padding(2);
             this.m_ButtonStartGame.Name = "m_ButtonStartGame";
             this.m_ButtonStartGame.Size = new System.Drawing.Size(198, 29);
             this.m_ButtonStartGame.TabIndex = 5;
@@ -209,7 +211,7 @@
             this.Controls.Add(this.m_LabelPlayerOne);
             this.Controls.Add(this.m_labelPlayersText);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "GameSettingForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

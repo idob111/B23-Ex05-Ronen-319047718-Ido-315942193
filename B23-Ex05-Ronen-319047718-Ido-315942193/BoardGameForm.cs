@@ -2,7 +2,6 @@
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using GameDesign;
 using GameLogic;
 
 namespace GameDesign
@@ -29,10 +28,6 @@ namespace GameDesign
             {
                 // Passes the button's row and col to play human turn
                 r_GameManager.playHumanTurn(buttonToPointDictionary[clickedButton], clickedButton);
-                if (r_GameManager.checkGameEnded())
-                {
-                    handleEndGame();
-                }
             }
         }
 
@@ -43,7 +38,7 @@ namespace GameDesign
         }
 
         // Resets the form board 
-        private void handleEndGame()
+        public void HandleEndGame()
         {
             Controls.Clear();
             buttonToPointDictionary.Clear();

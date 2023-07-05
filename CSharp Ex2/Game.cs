@@ -61,17 +61,17 @@ namespace GameLogic
                 gameMode = eMode.Computer;
             }
 
-            m_FirstPlayer =  new Player(ePlayers.PlayerOne, 0, eCellType.Cross, i_PlayerOneName);
+            m_FirstPlayer =  new Player(ePlayers.PlayerOne, 0, i_PlayerOneName);
             m_CurrentPlayer = m_FirstPlayer;
             m_BoardSize = i_BoardSize;
             m_Board = new Board(i_BoardSize);
             switch (gameMode)
             {
                 case eMode.Human:
-                    m_SecondPlayer = new Player(ePlayers.PlayerTwo, 0, eCellType.Circle, i_PlayerTwoName);
+                    m_SecondPlayer = new Player(ePlayers.PlayerTwo, 0, i_PlayerTwoName);
                     break;
                 case eMode.Computer:
-                    m_AiPlayer = new AiPlayer(ePlayers.PlayerTwo, 0, eCellType.Circle);
+                    m_AiPlayer = new AiPlayer(ePlayers.PlayerTwo, 0);
                     m_SecondPlayer = m_AiPlayer.PlayerData;
                     break;
             }
