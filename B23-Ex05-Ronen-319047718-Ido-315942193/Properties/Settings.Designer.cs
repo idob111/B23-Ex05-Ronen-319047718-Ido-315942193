@@ -9,7 +9,7 @@
 //------------------------------------------------------------------------------
 
 
-namespace B23_Ex05_Ronen_319047718_Ido_315942193.Properties
+namespace GameDesign.Properties
 {
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "11.0.0.0")]

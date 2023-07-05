@@ -1,21 +1,25 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using B23_Ex05_Ronen_319047718_Ido_315942193;
-using CSharp_Ex2;
+using GameDesign;
+using GameLogic;
 
-namespace B23_Ex02_Ronen_319047718_Ido_315942193
+namespace GameDesign
 {
     partial class BoardGameForm
     {
-        private Dictionary<Button, PointIndex> buttonPointIndexDictionary = new Dictionary<Button, PointIndex>();
+        private Dictionary<Button, Point> buttonToPointDictionary = new Dictionary<Button, Point>();
+
         private const int k_ButtonWidth = 50;
         private const int k_ButtonHeight = 50;
         private const int k_ButtonMargin = 5;
         private const int k_LabelMargin = 30;
+        private const int k_LabelSpacing = 20;
+        private const int k_FormMargin = 5;
+        private const int k_BottomMargin = 15;
+        private const int k_LabelWidthPadding = 10;
 
         private Label Player1NameLabel = new Label();
         private Label Player2NameLabel = new Label();
@@ -29,7 +33,7 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -45,7 +49,7 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent(GameSettings i_settings)
+        private void InitializeComponent()
         {
             this.SuspendLayout();
             // 
@@ -55,10 +59,10 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.Name = "BoardGameForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.ResumeLayout(false);
 
         }
-
 
         private void CreateButtonsTable(decimal i_Rows, decimal i_Cols)
         {
@@ -67,37 +71,36 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
                 for (int col = 0; col < i_Cols; col++)
                 {
                     Button button = new Button();
+                    Point buttonIndex = new Point(row, col);
                     button.Width = k_ButtonWidth;
                     button.Height = k_ButtonHeight;
                     button.Top = row * (k_ButtonHeight + k_ButtonMargin) + k_ButtonMargin;
                     button.Left = col * (k_ButtonWidth + k_ButtonMargin) + k_ButtonMargin;
                     button.Click += ButtonCell_Click;
                     button.TabStop = false;
-                    buttonPointIndexDictionary.Add(button, new PointIndex(row, col));
+                    buttonToPointDictionary.Add(button, buttonIndex);
                     Controls.Add(button);
                 }
             }
 
-            int formMargin = 5;
-            int formWidth = (int)i_Cols * (k_ButtonWidth + k_ButtonMargin) + k_ButtonMargin + formMargin;
-            int formHeight = (int)i_Rows * (k_ButtonHeight + k_ButtonMargin) + k_ButtonMargin + k_LabelMargin + formMargin;
+            int formWidth = (int)i_Cols * (k_ButtonWidth + k_ButtonMargin) + k_ButtonMargin + k_FormMargin;
+            int formHeight = (int)i_Rows * (k_ButtonHeight + k_ButtonMargin) + k_ButtonMargin + k_LabelMargin + k_FormMargin;
             this.ClientSize = new Size(formWidth, formHeight);
         }
 
-        // TODO: from some reason, the labels added in the visual designer keep disappearing. need to find a way to keep them 
-        // Until then we need to find some way to see the score tracker. this func DOESN'T work currently...
-        private void CreateScoreTracking(GameSettings i_Settings)
+        // Creates the labels with the score tracking and positions on the bottom center of the board
+        private void CreateScoreTracking()
         {
-            setNameLabelProperties(Player1NameLabel, string.Format("{0}: {1}", i_Settings.PlayerOneName, m_GameManager.PlayerOneScore()));
-            setNameLabelProperties(Player2NameLabel, string.Format("{0}: {1}", i_Settings.PlayerTwoName, m_GameManager.PlayerTwoScore()));
+            setNameLabelProperties(Player1NameLabel, string.Format("{0}: {1}", m_Settings.PlayerOneName, r_GameManager.PlayerOneScore()));
+            setNameLabelProperties(Player2NameLabel, string.Format("{0}: {1}", m_Settings.PlayerTwoName, r_GameManager.PlayerTwoScore()));
 
             int formMiddle = this.ClientSize.Width / 2;
-            int labelSpacing = 20;
-            int bothLabelsWidth = Player1NameLabel.Width + Player2NameLabel.Width + labelSpacing;
+            
+            int bothLabelsWidth = Player1NameLabel.Width + Player2NameLabel.Width + k_LabelSpacing;
             int p1NameLabelLeftMargin = formMiddle - (bothLabelsWidth / 2);
 
             Player1NameLabel.Left = p1NameLabelLeftMargin;
-            Player2NameLabel.Left = Player1NameLabel.Right + labelSpacing;
+            Player2NameLabel.Left = Player1NameLabel.Right + k_LabelSpacing;
 
             Controls.Add(Player1NameLabel);
             Controls.Add(Player2NameLabel);
@@ -107,57 +110,11 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
         private void setNameLabelProperties(Label i_Label, string i_LabelText)
         {
             i_Label.Text = i_LabelText;
-
-            int bottomMargin = 15;
-            i_Label.Top = this.ClientSize.Height - bottomMargin;
-
+            i_Label.Top = this.ClientSize.Height - k_BottomMargin;
             i_Label.Anchor = AnchorStyles.Bottom;
-
             Size labelTextSize = TextRenderer.MeasureText(i_Label.Text, i_Label.Font);
-            int labelWidthPadding = 10;
-            int labelWidth = labelTextSize.Width + labelWidthPadding;
-
+            int labelWidth = labelTextSize.Width + k_LabelWidthPadding;
             i_Label.Size = new Size(labelWidth, labelTextSize.Height);
-        }
-
-        private void ButtonCell_Click(object sender, EventArgs e)
-        {
-            // Handle button click event
-            Button clickedButton = sender as Button;
-            if (sender != null)
-            {
-                clickedButton.Enabled = false;
-                // Passes the button's row and col to play human turn
-                m_GameManager.playHumanTurn(buttonPointIndexDictionary[clickedButton], clickedButton);
-                if (m_GameManager.checkGameEnded())
-                {
-                    handleEndGame();
-                }
-                else if (!m_Settings.IsModeAgainstPlayer)
-                {
-                    PointIndex aiMoveIndex = m_GameManager.playAiTurn();
-                    updateAiButton(aiMoveIndex);
-                    if (m_GameManager.checkGameEnded())
-                    {
-                        handleEndGame();
-                    }
-                }
-            }
-        }
-
-        private void handleEndGame()
-        {
-            Controls.Clear();
-            buttonPointIndexDictionary.Clear();
-            CreateButtonsTable(m_Settings.NumberOfRows, m_Settings.NumberOfCols);
-            CreateScoreTracking(m_Settings);
-        }
-
-        private void updateAiButton(PointIndex aiMoveIndex)
-        {
-            Button aiButtonClicked = buttonPointIndexDictionary.FirstOrDefault(x => x.Value.Equals(aiMoveIndex)).Key;
-            aiButtonClicked.Enabled = false;
-            aiButtonClicked.Text = "O";
         }
 
         // Highlights the current player

@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
-namespace B23_Ex02_Ronen_319047718_Ido_315942193
+namespace GameDesign
 {
     public partial class GameSettingForm : Form
     {
+        private const string k_AiName = "Computer";
         GameSettings m_GameSettings = null;
         public GameSettings Settings { get => m_GameSettings; }
 
@@ -34,6 +29,7 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
             }
         }
 
+        // Shows MessageBox asking user if he is sure he wants to quit
         private void GameSettingForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (e.CloseReason == CloseReason.UserClosing)
@@ -48,6 +44,11 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
 
         private void ButtonStartGame_Click(object sender, EventArgs e)
         {
+            if (!m_CheckBoxIsPlayingMode.Checked)
+            {
+                m_TextBoxPlayerTwo.Text = k_AiName;
+            }
+
             m_GameSettings = new GameSettings(m_TextBoxPlayerOne.Text,
                 m_TextBoxPlayerTwo.Text, m_NumericUpDownRowsAmount.Value,
                 m_NumericUpDownColsAmount.Value,

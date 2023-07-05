@@ -1,5 +1,4 @@
-﻿
-namespace B23_Ex02_Ronen_319047718_Ido_315942193
+﻿namespace GameDesign
 {
     partial class GameSettingForm
     {
@@ -48,7 +47,8 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
             // m_labelPlayersText
             // 
             this.m_labelPlayersText.AutoSize = true;
-            this.m_labelPlayersText.Location = new System.Drawing.Point(11, 21);
+            this.m_labelPlayersText.Location = new System.Drawing.Point(8, 17);
+            this.m_labelPlayersText.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.m_labelPlayersText.Name = "m_labelPlayersText";
             this.m_labelPlayersText.Size = new System.Drawing.Size(59, 17);
             this.m_labelPlayersText.TabIndex = 0;
@@ -57,7 +57,8 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
             // m_LabelPlayerOne
             // 
             this.m_LabelPlayerOne.AutoSize = true;
-            this.m_LabelPlayerOne.Location = new System.Drawing.Point(29, 53);
+            this.m_LabelPlayerOne.Location = new System.Drawing.Point(22, 43);
+            this.m_LabelPlayerOne.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.m_LabelPlayerOne.Name = "m_LabelPlayerOne";
             this.m_LabelPlayerOne.Size = new System.Drawing.Size(64, 17);
             this.m_LabelPlayerOne.TabIndex = 1;
@@ -66,17 +67,19 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
             // m_CheckBoxIsPlayingMode
             // 
             this.m_CheckBoxIsPlayingMode.AutoSize = true;
-            this.m_CheckBoxIsPlayingMode.Location = new System.Drawing.Point(32, 87);
+            this.m_CheckBoxIsPlayingMode.Location = new System.Drawing.Point(24, 71);
+            this.m_CheckBoxIsPlayingMode.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.m_CheckBoxIsPlayingMode.Name = "m_CheckBoxIsPlayingMode";
             this.m_CheckBoxIsPlayingMode.Size = new System.Drawing.Size(18, 17);
-            this.m_CheckBoxIsPlayingMode.TabIndex = 2;
+            this.m_CheckBoxIsPlayingMode.TabIndex = 1;
             this.m_CheckBoxIsPlayingMode.UseVisualStyleBackColor = true;
             this.m_CheckBoxIsPlayingMode.CheckedChanged += new System.EventHandler(this.CheckBoxIsPlayingMode_CheckedChanged);
             // 
             // m_LabelPlayerTwo
             // 
             this.m_LabelPlayerTwo.AutoSize = true;
-            this.m_LabelPlayerTwo.Location = new System.Drawing.Point(56, 87);
+            this.m_LabelPlayerTwo.Location = new System.Drawing.Point(42, 71);
+            this.m_LabelPlayerTwo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.m_LabelPlayerTwo.Name = "m_LabelPlayerTwo";
             this.m_LabelPlayerTwo.Size = new System.Drawing.Size(64, 17);
             this.m_LabelPlayerTwo.TabIndex = 3;
@@ -84,24 +87,27 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
             // 
             // m_TextBoxPlayerOne
             // 
-            this.m_TextBoxPlayerOne.Location = new System.Drawing.Point(148, 53);
+            this.m_TextBoxPlayerOne.Location = new System.Drawing.Point(111, 43);
+            this.m_TextBoxPlayerOne.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.m_TextBoxPlayerOne.Name = "m_TextBoxPlayerOne";
-            this.m_TextBoxPlayerOne.Size = new System.Drawing.Size(133, 22);
-            this.m_TextBoxPlayerOne.TabIndex = 4;
+            this.m_TextBoxPlayerOne.Size = new System.Drawing.Size(101, 22);
+            this.m_TextBoxPlayerOne.TabIndex = 0;
             // 
             // m_TextBoxPlayerTwo
             // 
             this.m_TextBoxPlayerTwo.Enabled = false;
-            this.m_TextBoxPlayerTwo.Location = new System.Drawing.Point(148, 87);
+            this.m_TextBoxPlayerTwo.Location = new System.Drawing.Point(111, 71);
+            this.m_TextBoxPlayerTwo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.m_TextBoxPlayerTwo.Name = "m_TextBoxPlayerTwo";
-            this.m_TextBoxPlayerTwo.Size = new System.Drawing.Size(133, 22);
-            this.m_TextBoxPlayerTwo.TabIndex = 5;
+            this.m_TextBoxPlayerTwo.Size = new System.Drawing.Size(101, 22);
+            this.m_TextBoxPlayerTwo.TabIndex = 2;
             this.m_TextBoxPlayerTwo.Text = "[Computer]";
             // 
             // m_LabelBoardSize
             // 
             this.m_LabelBoardSize.AutoSize = true;
-            this.m_LabelBoardSize.Location = new System.Drawing.Point(14, 158);
+            this.m_LabelBoardSize.Location = new System.Drawing.Point(10, 128);
+            this.m_LabelBoardSize.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.m_LabelBoardSize.Name = "m_LabelBoardSize";
             this.m_LabelBoardSize.Size = new System.Drawing.Size(81, 17);
             this.m_LabelBoardSize.TabIndex = 6;
@@ -109,7 +115,8 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
             // 
             // m_NumericUpDownRowsAmount
             // 
-            this.m_NumericUpDownRowsAmount.Location = new System.Drawing.Point(84, 192);
+            this.m_NumericUpDownRowsAmount.Location = new System.Drawing.Point(63, 156);
+            this.m_NumericUpDownRowsAmount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.m_NumericUpDownRowsAmount.Maximum = new decimal(new int[] {
             10,
             0,
@@ -121,8 +128,8 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
             0,
             0});
             this.m_NumericUpDownRowsAmount.Name = "m_NumericUpDownRowsAmount";
-            this.m_NumericUpDownRowsAmount.Size = new System.Drawing.Size(45, 22);
-            this.m_NumericUpDownRowsAmount.TabIndex = 8;
+            this.m_NumericUpDownRowsAmount.Size = new System.Drawing.Size(34, 22);
+            this.m_NumericUpDownRowsAmount.TabIndex = 3;
             this.m_NumericUpDownRowsAmount.Value = new decimal(new int[] {
             4,
             0,
@@ -131,7 +138,8 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
             // 
             // m_NumericUpDownColsAmount
             // 
-            this.m_NumericUpDownColsAmount.Location = new System.Drawing.Point(236, 192);
+            this.m_NumericUpDownColsAmount.Location = new System.Drawing.Point(177, 156);
+            this.m_NumericUpDownColsAmount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.m_NumericUpDownColsAmount.Maximum = new decimal(new int[] {
             10,
             0,
@@ -143,8 +151,8 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
             0,
             0});
             this.m_NumericUpDownColsAmount.Name = "m_NumericUpDownColsAmount";
-            this.m_NumericUpDownColsAmount.Size = new System.Drawing.Size(45, 22);
-            this.m_NumericUpDownColsAmount.TabIndex = 10;
+            this.m_NumericUpDownColsAmount.Size = new System.Drawing.Size(34, 22);
+            this.m_NumericUpDownColsAmount.TabIndex = 4;
             this.m_NumericUpDownColsAmount.Value = new decimal(new int[] {
             7,
             0,
@@ -154,7 +162,8 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
             // m_LabelRows
             // 
             this.m_LabelRows.AutoSize = true;
-            this.m_LabelRows.Location = new System.Drawing.Point(32, 194);
+            this.m_LabelRows.Location = new System.Drawing.Point(24, 158);
+            this.m_LabelRows.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.m_LabelRows.Name = "m_LabelRows";
             this.m_LabelRows.Size = new System.Drawing.Size(46, 17);
             this.m_LabelRows.TabIndex = 7;
@@ -163,7 +172,8 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
             // m_LabelCols
             // 
             this.m_LabelCols.AutoSize = true;
-            this.m_LabelCols.Location = new System.Drawing.Point(184, 194);
+            this.m_LabelCols.Location = new System.Drawing.Point(138, 158);
+            this.m_LabelCols.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.m_LabelCols.Name = "m_LabelCols";
             this.m_LabelCols.Size = new System.Drawing.Size(39, 17);
             this.m_LabelCols.TabIndex = 9;
@@ -171,20 +181,21 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
             // 
             // m_ButtonStartGame
             // 
-            this.m_ButtonStartGame.Location = new System.Drawing.Point(17, 256);
+            this.m_ButtonStartGame.Location = new System.Drawing.Point(13, 208);
+            this.m_ButtonStartGame.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.m_ButtonStartGame.Name = "m_ButtonStartGame";
-            this.m_ButtonStartGame.Size = new System.Drawing.Size(264, 36);
-            this.m_ButtonStartGame.TabIndex = 11;
+            this.m_ButtonStartGame.Size = new System.Drawing.Size(198, 29);
+            this.m_ButtonStartGame.TabIndex = 5;
             this.m_ButtonStartGame.Text = "Start!";
             this.m_ButtonStartGame.UseVisualStyleBackColor = true;
             this.m_ButtonStartGame.Click += new System.EventHandler(this.ButtonStartGame_Click);
             // 
             // GameSettingForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(296, 304);
+            this.ClientSize = new System.Drawing.Size(222, 247);
             this.Controls.Add(this.m_ButtonStartGame);
             this.Controls.Add(this.m_NumericUpDownColsAmount);
             this.Controls.Add(this.m_LabelCols);
@@ -198,6 +209,7 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
             this.Controls.Add(this.m_LabelPlayerOne);
             this.Controls.Add(this.m_labelPlayersText);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "GameSettingForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
