@@ -26,7 +26,11 @@ namespace GameDesign
             m_Game.HumanTurn(i_ButtonPoint);
             updateMoveOnBoard(i_ClickedButton);
 
-            if (!m_Settings.IsModeAgainstPlayer)
+            if (checkGameEnded() && !m_Game.GameEnded)
+            {
+                r_GameBoardForm.HandleEndGame();
+            }
+            else if (!m_Settings.IsModeAgainstPlayer)
             {
                 playAiTurn();
             }
@@ -37,7 +41,13 @@ namespace GameDesign
         {
             Point aiMoveIndex = m_Game.AiTurn();
             updateMoveOnBoard(r_GameBoardForm.ConvertPointToButton(aiMoveIndex));
+
+            if (checkGameEnded() && !m_Game.GameEnded)
+            {
+                r_GameBoardForm.HandleEndGame();
+            }
         }
+
 
         //Change given button text based on the current player
         private void changeButtonText(Button i_ClickedButton)
@@ -61,7 +71,7 @@ namespace GameDesign
             m_Game.ChangePlayer();
             r_GameBoardForm.changeHighlightedPlayer(m_Game.CurrentPlayer.PlayerId);
         }
-        
+
         //return the scoring of player one
         public int PlayerOneScore()
         {

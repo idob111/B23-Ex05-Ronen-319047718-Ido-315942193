@@ -8,9 +8,9 @@ namespace GameLogic
         private Player m_AiPlayer;
         private const string k_AiName = "Computer";
 
-        public AiPlayer(ePlayers i_PlayerId, int i_Score, eCellType i_CellType)
+        public AiPlayer(ePlayers i_PlayerId, int i_Score)
         {
-            m_AiPlayer = new Player(i_PlayerId, i_Score, i_CellType, k_AiName);
+            m_AiPlayer = new Player(i_PlayerId, i_Score, k_AiName);
         }
 
         public Player PlayerData
