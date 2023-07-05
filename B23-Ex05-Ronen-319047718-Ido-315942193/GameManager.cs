@@ -26,7 +26,7 @@ namespace GameDesign
             m_Game.HumanTurn(i_ButtonPoint);
             updateMoveOnBoard(i_ClickedButton);
 
-            if (checkGameEnded() && !m_Game.GameEnded)
+            if (checkGameEnded())
             {
                 r_GameBoardForm.HandleEndGame();
             }
@@ -42,7 +42,7 @@ namespace GameDesign
             Point aiMoveIndex = m_Game.AiTurn();
             updateMoveOnBoard(r_GameBoardForm.ConvertPointToButton(aiMoveIndex));
 
-            if (checkGameEnded() && !m_Game.GameEnded)
+            if (checkGameEnded())
             {
                 r_GameBoardForm.HandleEndGame();
             }
