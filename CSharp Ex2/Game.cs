@@ -81,38 +81,38 @@
             changePlayer();
         }
 
-        // 1) Prints the current game board and prompts the player to make a move.
-        // 2) Receives Player position input and validates it (valid location and valid string)
-        //private PointIndex getCurrentPlayerMove()
-        //{
-        //    PointIndex playerMove;
-        //    playerMove = m_CurrentPlayer.PlayTurn(m_Board, r_FirstPlayer, m_SecondPlayer);
-
-        //    return playerMove;
-        //}
-
         // Ai does it's move and updates it on the logical board
-        public void aiTurn()
+        public PointIndex aiTurn()
         {
             PointIndex playerMove = m_AiPlayer.PlayTurn(m_Board, m_BoardSize);
             updateBoardAndPlayers(playerMove);
             changePlayer();
+            return playerMove;
         }
 
         // Updates the board and ends the game if the player lost. If player won then updates his score.
         private void updateBoardAndPlayers(PointIndex i_Cell)
         {
             m_Board.UpdateBoardCell(i_Cell, m_CurrentPlayer.PlayerId);
-            m_GameEnded = isPlayerLost(i_Cell);
 
-            if (m_GameEnded)
+            if (isPlayerLost(i_Cell))
             {
+                m_GameEnded = true;
                 changePlayer();
                 CurrentPlayer.Score++;
                 m_EndingMessage = string.Format("{0} Won!", m_CurrentPlayer.ToString());
             }
+            if (isBoardFullWithoutWinners())
+            {
+                m_GameEnded = true;
+                m_EndingMessage = k_BoardFullMessage;
+            }
         }
 
+        private bool isBoardFullWithoutWinners()
+        {
+            return m_Board.TurnsLeft == 0;
+        }
         // The algorithm responsible for checking if the player that did the current move lost.
         // Checks if a given Row/Column/Diagonal is full using the bucket arrays in Board.
         // If they are then checks if the given Row/Column/Diagonal is the same shape.
@@ -148,18 +148,6 @@
             }
 
             return rowSameShpe || columnSameShape || topLeftBottomRightDiagonalSameShape || BottomLeftTopRightDiagonalSameShape;
-        }
-
-        // Returns true or false based on if the game ended.
-        private bool isGameEnded()
-        {
-            if (m_Board.TurnsLeft == 0 && !m_GameEnded) // If there are no moves and the game didn't end because someone won
-            {
-                m_GameEnded = true;
-                m_EndingMessage = k_BoardFullMessage;
-            }
-
-            return m_GameEnded;
         }
 
         // Resets the game board and keeps the score as is

@@ -22,11 +22,17 @@ namespace B23_Ex05_Ronen_319047718_Ido_315942193
             r_GameBoardForm.changeHighlightedPlayer(m_Game.CurrentPlayer.PlayerId);
         }
 
-
         // Updates the logic game board according to the player's chosen move
         public void playHumanTurn(PointIndex i_ButtonPointIndex, Button i_ClickedButton)
         {
-            // TODO: Move to the form. We should actually implement the bonus Guy gave in the task file. It will deal with this much better.
+            changeButtonText(i_ClickedButton);
+            m_Game.HumanTurn(i_ButtonPointIndex);
+            r_GameBoardForm.changeHighlightedPlayer(m_Game.CurrentPlayer.PlayerId);
+        }
+
+        //Change given button text
+        private void changeButtonText(Button i_ClickedButton)
+        {
             switch (m_Game.CurrentPlayer.PlayerId)
             {
                 case ePlayers.PlayerOne:
@@ -36,15 +42,14 @@ namespace B23_Ex05_Ronen_319047718_Ido_315942193
                     i_ClickedButton.Text = "O";
                     break;
             }
-
-            m_Game.HumanTurn(i_ButtonPointIndex);
-            r_GameBoardForm.changeHighlightedPlayer(m_Game.CurrentPlayer.PlayerId);
         }
-
+        
+        //return the scoring of player one
         public int PlayerOneScore()
         {
             return m_Game.GetScoringByPlayerId(ePlayers.PlayerOne);
         }
+        //return the scoring of player Two
         public int PlayerTwoScore()
         {
             return m_Game.GetScoringByPlayerId(ePlayers.PlayerTwo);
@@ -52,9 +57,11 @@ namespace B23_Ex05_Ronen_319047718_Ido_315942193
 
         // TODO: Add listener for AI to play a turn 
         // Chooses an empty cell on the game board and updates it accordingly in the button board
-        public static void playAiTurn()
+        public PointIndex playAiTurn()
         {
-
+            PointIndex pointIndex = m_Game.aiTurn();
+            r_GameBoardForm.changeHighlightedPlayer(m_Game.CurrentPlayer.PlayerId);
+            return pointIndex;
         }
 
         // If the game ended shows a game ended message and resets the game
@@ -63,19 +70,16 @@ namespace B23_Ex05_Ronen_319047718_Ido_315942193
             bool isGameEnded = false;
             if (m_Game.GameEnded)
             {
-                MessageBox.Show(m_Game.EndingMessage, string.Empty, MessageBoxButtons.OK);
-                resetGame();
+                DialogResult userConfiramtion = MessageBox.Show(string.Format("{0}\nPlay another round?", m_Game.EndingMessage), "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (userConfiramtion == DialogResult.No)
+                {
+                    Application.Exit();
+                }
+                m_Game.ResetGame();
                 isGameEnded = true;
             }
             return isGameEnded;
         }
 
-        // Resets the game Both logically and visually
-        private void resetGame()
-        {
-            m_Game.ResetGame();
-
-            // TODO: Reset all buttons in BoardGameForm.designer.cs
-        }
     }
 }

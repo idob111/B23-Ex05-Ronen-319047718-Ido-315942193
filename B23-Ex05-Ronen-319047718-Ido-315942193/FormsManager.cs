@@ -32,19 +32,20 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
             } while (settings == null);
             BoardGameForm boardGameForm = new BoardGameForm(settings);
             boardGameForm.runBoard();
-            
+
 
         }
 
+        //Validate the setting we got from user are valid
         private static void validateSettings(GameSettings i_Settings)
         {
             string k_NoPlayerNameMsg = "Player name cannot be empty";
-            if (i_Settings.PlayerOneName == string.Empty)
+            if (!playerHasName(i_Settings.PlayerOneName))
             {
                 throw new FormatException(k_NoPlayerNameMsg);
             }
 
-            if (!playerTwoHasName(i_Settings))
+            if (i_Settings.IsModeAgainstPlayer && !playerHasName(i_Settings.PlayerTwoName))
             {
                 throw new FormatException(k_NoPlayerNameMsg);
             }
@@ -55,9 +56,10 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
             }
         }
 
-        private static bool playerTwoHasName(GameSettings i_Settings)
+        //check if given player has name
+        private static bool playerHasName(string i_PlayerName)
         {
-            return (i_Settings.IsModeAgainstPlayer && (i_Settings.PlayerTwoName != string.Empty));
+            return i_PlayerName != string.Empty;
         }
     }
 }
