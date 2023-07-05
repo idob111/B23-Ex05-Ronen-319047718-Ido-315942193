@@ -9,7 +9,7 @@
 //------------------------------------------------------------------------------
 
 
-namespace B23_Ex05_Ronen_319047718_Ido_315942193.Properties
+namespace GameDesign.Properties
 {
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.

@@ -1,27 +1,16 @@
 ﻿using System;
+using System.Drawing;
 
-namespace CSharp_Ex2
+namespace GameLogic
 {
     public class AiPlayer
     {
         private Player m_AiPlayer;
+        private const string k_AiName = "Computer";
 
         public AiPlayer(ePlayers i_PlayerId, int i_Score, eCellType i_CellType)
         {
-            m_AiPlayer = new Player(i_PlayerId, i_Score, i_CellType);
-        }
-
-        public ePlayers Id
-        {
-            get
-            {
-                return m_AiPlayer.PlayerId;
-            }
-
-            set
-            {
-                m_AiPlayer.PlayerId = value;
-            }
+            m_AiPlayer = new Player(i_PlayerId, i_Score, i_CellType, k_AiName);
         }
 
         public Player PlayerData
@@ -38,14 +27,14 @@ namespace CSharp_Ex2
         }
 
         // Randomize the computer turn
-        public PointIndex PlayTurn(Board i_GameBoard, int i_BoardSize)
+        public Point PlayTurn(Board i_GameBoard, int i_BoardSize)
         {
-            PointIndex aiMove = new PointIndex();
+            Point aiMove = new Point();
             do
             {
                 Random random = new Random();
-                aiMove.Row = random.Next(0, i_BoardSize);
-                aiMove.Column = random.Next(0, i_BoardSize);
+                aiMove.X = random.Next(0, i_BoardSize);
+                aiMove.Y = random.Next(0, i_BoardSize);
             }
             while (!i_GameBoard.IsCellEmpty(aiMove));
 

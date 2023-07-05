@@ -1,18 +1,13 @@
 ﻿using System;
+using System.Drawing;
 
-namespace CSharp_Ex2
+namespace GameLogic
 {
     public enum eCellType
     {
         Empty,
         Cross,
         Circle
-    }
-
-    public enum eRowColumn
-    {
-        Row,
-        Column
     }
 
     public enum eDiagonal
@@ -40,7 +35,6 @@ namespace CSharp_Ex2
             m_TurnsLeft = i_BoardSize * i_BoardSize;
             m_BoardSize = i_BoardSize;
         }
-
         public eCellType[,] BoardCells
         {
             get
@@ -51,19 +45,6 @@ namespace CSharp_Ex2
             set
             {
                 m_BoardCells = value;
-            }
-        }
-
-        public int BoardSize
-        {
-            get
-            {
-                return m_BoardSize;
-            }
-
-            set
-            {
-                m_BoardSize = value;
             }
         }
 
@@ -120,15 +101,15 @@ namespace CSharp_Ex2
         }
 
         // Updates the given cell to the given player's shape. 
-        public void UpdateBoardCell(PointIndex i_Cell, ePlayers i_Player)
+        public void UpdateBoardCell(Point i_Cell, ePlayers i_Player)
         {
             switch (i_Player)
             {
                 case ePlayers.PlayerOne:
-                    m_BoardCells[i_Cell.Row, i_Cell.Column] = eCellType.Cross;
+                    m_BoardCells[i_Cell.X, i_Cell.Y] = eCellType.Cross;
                     break;
                 case ePlayers.PlayerTwo:
-                    m_BoardCells[i_Cell.Row, i_Cell.Column] = eCellType.Circle;
+                    m_BoardCells[i_Cell.X, i_Cell.Y] = eCellType.Circle;
                     break;
             }
 
@@ -137,19 +118,19 @@ namespace CSharp_Ex2
         }
 
         // Updated the given point index in the bucket arrays.
-        private void updateBucketArrays(PointIndex i_Cell)
+        private void updateBucketArrays(Point i_Cell)
         {
-            m_OccupiedCellsInRowBucket[i_Cell.Row]++;
-            m_OccupiedCellsInColumnBucket[i_Cell.Column]++;
+            m_OccupiedCellsInRowBucket[i_Cell.X]++;
+            m_OccupiedCellsInColumnBucket[i_Cell.Y]++;
 
             // Check if cell is on diagonal 0
-            if (i_Cell.Row == i_Cell.Column)
+            if (i_Cell.X == i_Cell.Y)
             {
                 m_OccupiedCellsInDiagonalBucket[0]++;
             }
 
             // Check if cell is on diagonal 1
-            if (i_Cell.Row == (m_BoardSize - i_Cell.Column - 1))
+            if (i_Cell.X == (m_BoardSize - i_Cell.Y - 1))
             {
                 m_OccupiedCellsInDiagonalBucket[1]++;
             }
@@ -240,9 +221,9 @@ namespace CSharp_Ex2
             return diagonalSameShape;
         }
 
-        public bool IsCellEmpty(PointIndex i_Cell)
+        public bool IsCellEmpty(Point i_Cell)
         {
-            return m_BoardCells[i_Cell.Row, i_Cell.Column] == eCellType.Empty;
+            return m_BoardCells[i_Cell.X, i_Cell.Y] == eCellType.Empty;
         }
     }
 }

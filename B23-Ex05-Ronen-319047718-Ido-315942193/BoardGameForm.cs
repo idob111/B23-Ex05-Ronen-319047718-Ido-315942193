@@ -1,32 +1,58 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
-using B23_Ex05_Ronen_319047718_Ido_315942193;
-using CSharp_Ex2;
+using GameDesign;
+using GameLogic;
 
-namespace B23_Ex02_Ronen_319047718_Ido_315942193
+namespace GameDesign
 {
     public partial class BoardGameForm : Form
     {
-        private GameManager m_GameManager;
+        private readonly GameManager r_GameManager;
         private GameSettings m_Settings;
-
         public BoardGameForm(GameSettings i_Settings)
         {
             m_Settings = i_Settings;
-            m_GameManager = new GameManager(i_Settings, this);
+            InitializeComponent();
+            r_GameManager = new GameManager(m_Settings, this);
             FormClosing += BoardGameForm_FormClosing;
-
-        }
-
-        public void runBoard()
-        {
-            InitializeComponent(m_Settings);
             CreateButtonsTable(m_Settings.NumberOfRows, m_Settings.NumberOfCols);
-            CreateScoreTracking(m_Settings);
-            Application.Run(this);
+            CreateScoreTracking();
         }
 
+        private void ButtonCell_Click(object sender, EventArgs e)
+        {
+            // Handle button click event
+            Button clickedButton = sender as Button;
+            if (sender != null)
+            {
+                // Passes the button's row and col to play human turn
+                r_GameManager.playHumanTurn(buttonToPointDictionary[clickedButton], clickedButton);
+                if (r_GameManager.checkGameEnded())
+                {
+                    handleEndGame();
+                }
+            }
+        }
+
+        // Receives a point and returns the corresponding button
+        public Button ConvertPointToButton(Point i_PointToButton)
+        {
+            return buttonToPointDictionary.FirstOrDefault(x => x.Value.Equals(i_PointToButton)).Key; ;
+        }
+
+        // Resets the form board 
+        private void handleEndGame()
+        {
+            Controls.Clear();
+            buttonToPointDictionary.Clear();
+            CreateButtonsTable(m_Settings.NumberOfRows, m_Settings.NumberOfCols);
+            changeHighlightedPlayer(ePlayers.PlayerOne);
+            CreateScoreTracking();
+        }
+
+        // Shows MessageBox asking user if he is sure he wants to quit
         private void BoardGameForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (e.CloseReason == CloseReason.UserClosing)
@@ -38,6 +64,7 @@ namespace B23_Ex02_Ronen_319047718_Ido_315942193
                 }
             }
         }
-
     }
+
+    
 }

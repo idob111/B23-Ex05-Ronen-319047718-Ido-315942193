@@ -1,38 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Drawing;
 using System.Windows.Forms;
-using B23_Ex02_Ronen_319047718_Ido_315942193;
-using CSharp_Ex2;
+using GameLogic;
 
-namespace B23_Ex05_Ronen_319047718_Ido_315942193
+namespace GameDesign
 {
     public class GameManager
     {
         private Game m_Game;
+        private GameSettings m_Settings;
         private readonly BoardGameForm r_GameBoardForm;
 
         // Starts a new game with the given settings
         public GameManager(GameSettings i_Settings, BoardGameForm i_BoardGameForm)
         {
             m_Game = new Game();
-            m_Game.InitGame((int)i_Settings.NumberOfRows, i_Settings.IsModeAgainstPlayer);
+            m_Game.InitGame((int)i_Settings.NumberOfRows, i_Settings.IsModeAgainstPlayer, i_Settings.PlayerOneName, i_Settings.PlayerTwoName);
             r_GameBoardForm = i_BoardGameForm;
             r_GameBoardForm.changeHighlightedPlayer(m_Game.CurrentPlayer.PlayerId);
+            m_Settings = i_Settings;
         }
 
         // Updates the logic game board according to the player's chosen move
-        public void playHumanTurn(PointIndex i_ButtonPointIndex, Button i_ClickedButton)
+        public void playHumanTurn(Point i_ButtonPoint, Button i_ClickedButton)
         {
-            changeButtonText(i_ClickedButton);
-            m_Game.HumanTurn(i_ButtonPointIndex);
-            r_GameBoardForm.changeHighlightedPlayer(m_Game.CurrentPlayer.PlayerId);
+            m_Game.HumanTurn(i_ButtonPoint);
+            updateMoveOnBoard(i_ClickedButton);
+
+            if (!m_Settings.IsModeAgainstPlayer)
+            {
+                playAiTurn();
+            }
         }
 
-        //Change given button text
+        // Chooses an empty cell on the game board and updates it accordingly in the button board
+        private void playAiTurn()
+        {
+            Point aiMoveIndex = m_Game.AiTurn();
+            updateMoveOnBoard(r_GameBoardForm.ConvertPointToButton(aiMoveIndex));
+        }
+
+        //Change given button text based on the current player
         private void changeButtonText(Button i_ClickedButton)
         {
+            i_ClickedButton.Enabled = false;
             switch (m_Game.CurrentPlayer.PlayerId)
             {
                 case ePlayers.PlayerOne:
@@ -43,25 +53,25 @@ namespace B23_Ex05_Ronen_319047718_Ido_315942193
                     break;
             }
         }
+
+        // Updates the selected button text, changes the player and highlights him
+        private void updateMoveOnBoard(Button i_ClickedButton)
+        {
+            changeButtonText(i_ClickedButton);
+            m_Game.ChangePlayer();
+            r_GameBoardForm.changeHighlightedPlayer(m_Game.CurrentPlayer.PlayerId);
+        }
         
         //return the scoring of player one
         public int PlayerOneScore()
         {
             return m_Game.GetScoringByPlayerId(ePlayers.PlayerOne);
         }
+
         //return the scoring of player Two
         public int PlayerTwoScore()
         {
             return m_Game.GetScoringByPlayerId(ePlayers.PlayerTwo);
-        }
-
-        // TODO: Add listener for AI to play a turn 
-        // Chooses an empty cell on the game board and updates it accordingly in the button board
-        public PointIndex playAiTurn()
-        {
-            PointIndex pointIndex = m_Game.aiTurn();
-            r_GameBoardForm.changeHighlightedPlayer(m_Game.CurrentPlayer.PlayerId);
-            return pointIndex;
         }
 
         // If the game ended shows a game ended message and resets the game
@@ -75,6 +85,7 @@ namespace B23_Ex05_Ronen_319047718_Ido_315942193
                 {
                     Application.Exit();
                 }
+
                 m_Game.ResetGame();
                 isGameEnded = true;
             }
